@@ -4,13 +4,15 @@ main(){
 
  
   cout<<"Enter Imposters:";
-  int imposters;
+  float imposters;
   cin>>imposters;
 
  cout<<"Enter Players:";
- int players;
+ float players;
  cin>>players;
 
  float chance;
  chance = 100 * (imposters/players);
+
+ count<<"Chance = "<<chance;
 }
