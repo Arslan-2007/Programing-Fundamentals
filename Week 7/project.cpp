@@ -225,7 +225,7 @@ main()
                                 }
                             }
 
-                            // code to display sorted data
+                            
                         }
                         else if (option == "5")
                         {
