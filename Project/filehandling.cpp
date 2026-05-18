@@ -38,8 +38,10 @@ void loadmedicine()
     data.ignore();
     for (int i = 0; i < count; i++)
     {
-        getline(data, medicine[i],',');
-        data >> price[i]>> quantity[i];
+        getline(data, medicine[i], ',');
+        data >> price[i];
+        data.ignore();
+        data >> quantity[i];
         data.ignore();
     }
     data.close();
@@ -54,7 +56,7 @@ void saveEmployee()
         if (employee[i] != "")
         {
             data << employee[i] << ","
-                 << salary[i]<<"\n";
+                 << salary[i] << "\n";
         }
     }
     data.close();
@@ -67,7 +69,7 @@ void loadEmployee()
     data.ignore();
     for (int i = 0; i < employeecount; i++)
     {
-        getline(data, employee[i],',');
+        getline(data, employee[i], ',');
         data >> salary[i];
         data.ignore();
     }
@@ -220,6 +222,30 @@ void deleteRecord()
         getch();
     }
 }
+void sortMedicine()
+{
+    // sorting medicine on the base of price from low to high
+    for (int i = 0; i < count; i++)
+    {
+        for (int j = 0; j < count - i - 1; j++)
+        {
+            if (price[j] > price[j + 1])
+            {
+                int temp = price[j];
+                price[j] = price[j + 1];
+                price[j + 1] = temp;
+                int qtemp = quantity[j];
+                quantity[j] = quantity[j + 1];
+                quantity[j + 1] = qtemp;
+                string ntemp = medicine[j];
+                medicine[j] = medicine[j + 1];
+                medicine[j + 1] = ntemp;
+            }
+        }
+    }
+    viewAllMedicine();
+    pause();
+}
 void MedicineManagementMenu()
 
 {
@@ -231,7 +257,8 @@ void MedicineManagementMenu()
         cout << "3. Search medicine" << endl;
         cout << "4. Update medicine" << endl;
         cout << "5. Delete a record" << endl;
-        cout << "6. Return to admin menu" << endl;
+        cout << "6. Sorting[Price low to high]"<<endl;
+        cout << "7. Return to admin menu" << endl;
         cout << "Choose option(1-6):";
         string option;
         cin >> option;
@@ -262,7 +289,11 @@ void MedicineManagementMenu()
             // delete record
             deleteRecord();
         }
-        else if (option == "6")
+        else if(option == "6"){
+            //sorting
+            sortMedicine();
+        }
+        else if (option == "7")
         {
             break;
         }
